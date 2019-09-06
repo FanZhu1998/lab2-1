@@ -1,8 +1,5 @@
 # README 
 
-On github accept the invitation from github classroom for the lab by clicking on link
-
-https://classroom.github.com/   (update!)
 
 
 Open Rstudio on saxon at http://saxon.stat.duke.edu:8787 and login with your netid and password.  

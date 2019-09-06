@@ -6,16 +6,18 @@ date: "September 7, 2019"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo =TRUE)
+library(dplyr)
+library(GGally)
 ```
 
 ## Topics
 
 
-* `boxCox`   from  `library(car)`  
-* `boxTidwell`  from  `library(car)`  
-* `powerTransform` from `library(car)` 
+* added variable plots `avPlots` from  `library(car)` 
 * `termplot`  Base R
-* `avPlots` from  `library(car)`  
+* `boxCox`   from  `library(car)`  
+* `powerTransform` from `library(car)` 
+
 
 ## Interpretation with Multiple Regression: Added Variable Plots
 
@@ -124,7 +126,7 @@ In the added variable plot,
 
 
 
-## BoxTidwell
+## Transformations
 
 ```{r}
 data("Prestige")
@@ -135,18 +137,23 @@ pairs(Prestige)
 ```
 
 
-```{r}
-boxTidwell(prestige ~ income + education, ~ type + poly(women, 2), data=Prestige)
-```
-
-
-## BoxCox
+###  BoxCox
 
 ```{r}
-boxCox(lm(prestige ~ income + education + type + poly(women, 2), data=Prestige))
+car::boxCox(lm(prestige ~ income + education + type + poly(women, 2), data=Prestige))
 ```
 
 see `help(boxCox)` for generalizations for non-positive responses
+
+### PowerTransform
+
+```{r}
+car::powerTransform(Prestige[, 1:5], family="bcnPower")  
+#omit type last column as it is discrete
+# allow non-positive values
+# 
+# see help(powerTransform) for examples and testing for "nice" powers
+```
 
 
 ## Termplot output
